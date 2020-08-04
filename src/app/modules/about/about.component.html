@@ -1,0 +1,20 @@
+<div class="about" *ngIf="about">
+  <h2>About</h2>
+  <div class="about-top">
+    <div class="col-md-6 ab-top">
+      <img [src]="about.image" class="img-responsive" alt="about.image">
+    </div>
+    <div class="col-md-6 ab-top">
+      <h3>{{about.heading}}</h3>
+      <p>{{about.description}}.</p>
+    </div>
+    <div class="clearfix"> </div>
+  </div>
+  <!-- Meet our Team-->
+  <app-our-team></app-our-team>
+  <!-- End our Team-->
+  <!-- Testimonials-->
+  <app-testimonials></app-testimonials>
+  <!-- End Testimonials-->
+  
+</div>

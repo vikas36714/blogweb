@@ -24,9 +24,11 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {
@@ -87,9 +89,7 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "styles": [],
             "scripts": []
           }
         },
@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "blogweb"
+    }
+  },
+  "defaultProject": "blogweb",
+  "cli": {
+    "analytics": "6d6aa9f3-30cc-4ca8-8329-e493c986f202"
+  }
 }

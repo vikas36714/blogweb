@@ -1,0 +1,19 @@
+<div class="b-search">
+    <form>
+        <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+        <input type="submit" value="">
+    </form>
+</div>
+<h3>Recent Posts</h3>
+<div class="blo-top" >
+    <div class="blog-grids" *ngFor="let blog of blogs">
+        <div class="blog-grid-left">
+            <a routerLink="['blog', blog.id]"><img src="{{blog.image}}" class="img-responsive" alt="{{blog.title}}" style="height: 57px;"></a>
+        </div>
+        <div class="blog-grid-right">
+            <h4><a routerLink="['blog', blog.id]">{{blog.title}} </a></h4>
+            <p>{{blog.description}}</p>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>

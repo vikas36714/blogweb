@@ -1,0 +1,25 @@
+    <div class="col-md-9 bann-right">
+        <!-- banner -->
+        <app-banner *ngIf="router.url == '/'"></app-banner>
+        <!-- banner -->
+        <!-- nam-matis -->
+        <app-featured-posts *ngIf="router.url == '/'"></app-featured-posts>
+        <!-- nam-matis -->
+    </div>
+    <div class="col-md-3 bann-left">
+
+        <!-- recent posts -->
+
+            <app-recent-posts *ngIf="router.url == '/'"></app-recent-posts>
+        <!-- recent posts -->
+
+        <!--categories -->
+
+            <app-categories *ngIf="router.url == '/'"></app-categories>
+        <!--categories -->
+
+    </div>
+    <div class="clearfix"> </div>
+    <!-- slider -->
+        <app-slider *ngIf="router.url == '/'"></app-slider>
+    <!-- slider -->

@@ -1,0 +1,12 @@
+<!-- featured blog -->
+<div class="nam-matis">
+  <div class="nam-matis-top">
+    <div class="col-md-6 nam-matis-1" *ngFor="let blog of blogs">
+      <a [routerLink]="['blog', blog.id]"><img src="{{blog.image}}" class="img-responsive" alt="{{blog.title}}"></a>
+      <h3><a [routerLink]="['blog', blog.id]">{{blog.title}}</a></h3>
+      <p>{{blog.description}}.</p>
+    </div>
+    <div class="clearfix"> </div>
+  </div>
+</div>
+<!--  featured blog -->
