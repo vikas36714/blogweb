@@ -54,19 +54,12 @@ class AdminBlogController extends BaseController
            ]);
 
         if ($request->hasFile('image')) {
-
             $image = $request->file('image');
-
             $image_name = time() . '.' . $image->getClientOriginalExtension();
-
             $destinationPath = public_path('blogs_images');
-
             $img = Image::make($image->getRealPath());
-
             $img->resize(1010, 675)->save($destinationPath.'/'.$image_name);
-
            // $image->move($destinationPath, $image_name);
-
         }
 
         $blog = new Blog;

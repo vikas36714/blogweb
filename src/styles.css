@@ -1116,7 +1116,7 @@ i.adm1{
 	color: #bbb;
 	background: none;
 	-webkit-appearance: none;
-	float: left;
+	/* float: left; */
 	outline: none;
 	font-weight:400;
 	border-radius: 0.3em;
@@ -1587,14 +1587,15 @@ a.b-home:hover{
 .register-top-grid div, .register-bottom-grid div {
 	width: 48%;
 	float: left;
-	margin: 10px 0;
+	margin: 0px 0;
 }
 .register-top-grid span, .register-bottom-grid span {
 	color:#999;
 	font-size: 0.85em;
 	padding-bottom: 0.2em;
 	display: block;
-	text-transform: uppercase;
+  text-transform: uppercase;
+  margin: 2%;
 }
 .register-top-grid input[type="text"], .register-bottom-grid input[type="text"],.register-top-grid input[type="password"], .register-bottom-grid input[type="password"]{
 	border: 1px solid #26313b;
@@ -2442,4 +2443,8 @@ ul.pagination {
 a.b-home {
 	font-size: 0.8125em;
 }
+}
+
+.error-color {
+  color: red;
 }

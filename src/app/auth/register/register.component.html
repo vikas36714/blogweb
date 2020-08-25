@@ -2,24 +2,34 @@
 
 <div class="main-1">
   <div class="register">
-    <form (ngSubmit)="register()" [formGroup]="registerForm">
+    <div *ngIf="success; else elseblock" class="contact-message">
+      <div class="contact-success">
+        <h2 class="text-success">Success!</h2>
+        <h4 class="text-success">Registration form has been successfully submitted.</h4>
+      </div>
+    </div>
+    <ng-template #elseblock>
+      <div class="error-color" *ngIf="error">
+        <h1>{{error.errorTitle}}</h1>
+        <h3>{{error.errorDesc}}</h3>
+      </div>
+    </ng-template>
+    <form [formGroup]="registerForm" (ngSubmit)="register()" >
       <div class="register-top-grid">
         <h3>PERSONAL INFORMATION</h3>
         <div class="wow fadeInLeft" data-wow-delay="0.4s">
           <span>First Name<label>*</label></span>
-          <input type="text" formControlName="firstName" required>
-          <div *ngIf="firstName?.invalid && (firstName.dirty || firstName.touched)" class="error">
-            <div *ngIf="firstName.errors" style="color: brown; width: auto">
-              First name is required.
-            </div>
+          <input type="text" formControlName="firstName">
+          <div *ngIf="submitted && form_controls.firstName.errors" class="error-color">
+            <div *ngIf="form_controls.firstName.errors.required" style="width: auto;">First name is required</div>
           </div>
         </div>
         
         <div class="wow fadeInRight" data-wow-delay="0.4s">
           <span>Last Name<label>*</label></span>
           <input type="text" formControlName="lastName" required>
-          <div *ngIf="lastName?.invalid && (lastName.dirty || lastName.touched)" class="error">
-            <div *ngIf="lastName.errors" style="color: brown; width: auto">
+          <div *ngIf="submitted && form_controls.lastName.errors" class="error-color">
+            <div *ngIf="form_controls.lastName.errors.required" style="width: auto;">
               Last name is required.
             </div>
           </div>
@@ -28,16 +38,20 @@
         <div class="wow fadeInRight" data-wow-delay="0.4s">
           <span>Email Address<label>*</label></span>
           <input type="text" formControlName="email" required>
-          <div *ngIf="email?.invalid && (email.dirty || email.touched)" class="error">
-            <div *ngIf="email.errors" style="color: brown; width: auto">
+          <div *ngIf="submitted && form_controls.email.errors" class="error-color">
+            <div *ngIf="form_controls.email.errors.required" style="width: auto;">
               Email is required.
             </div>
+            <div *ngIf="form_controls.email.errors.email">Email must be a valid email address</div>
           </div>
         </div>
         
         <div class="clearfix"> </div>
         <a class="news-letter" href="#">
-          <label class="checkbox"><input type="checkbox" formControlName="signup" checked=""><i> </i>Sign Up for Newsletter</label>
+          <label class="checkbox">
+            <input type="checkbox" formControlName="acceptTerms" checked="" ><i> </i>Accept Terms & Conditions
+            <div *ngIf="submitted && form_controls.acceptTerms.errors" class="error-color" style="width: auto;">Accept Ts & Cs is required</div>
+          </label>
         </a>
       </div>
       <div class="register-bottom-grid">
@@ -45,20 +59,20 @@
         <div class="wow fadeInLeft" data-wow-delay="0.4s">
           <span>Password<label>*</label></span>
           <input type="password" formControlName="password" required>
-          <div *ngIf="password?.invalid && (password.dirty || password.touched)" class="error">
-            <div *ngIf="password.errors" style="color: brown; width: auto">
-              Password is required.
-            </div>
+          <div *ngIf="submitted && form_controls.password.errors" class="error-color">
+              <div *ngIf="form_controls.password.errors.required">Password is required</div>
+              <div *ngIf="form_controls.password.errors.minlength">Password must be at least 6 characters</div>
           </div>
         </div>
         
         <div class="wow fadeInRight" data-wow-delay="0.4s">
           <span>Confirm Password<label>*</label></span>
           <input type="password" formControlName="confirmPassword" required>
-          <div *ngIf="confirmPassword?.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="error">
-            <div *ngIf="confirmPassword.errors" style="color: brown; width: auto">
+          <div *ngIf="submitted && form_controls.confirmPassword.errors" class="error-color" >
+            <div *ngIf="form_controls.confirmPassword.errors.required" style="width: auto;">
               Confirm Password is required.
             </div>
+            <div *ngIf="form_controls.confirmPassword.errors.mustMatch">Passwords must match</div>
           </div>
         </div>
         

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { IContact } from '../interfaces/contact';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +28,8 @@ constructor(private http: HttpClient) { }
     return this.http.get<any>(this.serverUrl + 'recent_blogs')
   }
 
-  contactForm(data: any): Observable<any> {
-    return this.http.post<any>(this.serverUrl + 'contact', data)
+  contactForm(data: any): Observable<IContact[]> {
+    return this.http.post<IContact[]>(this.serverUrl + 'contact', data)
   }
 
   getGallery(): Observable<any> {

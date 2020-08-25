@@ -23,7 +23,7 @@ class BaseController extends Controller
 
     // Error  response method. //
 
-    public function sendError($error, $errorMessages, $code= 404)
+    public function sendError($error, $errorMessages, $code='')
     {
         $response = [
             'success' => false,
@@ -34,6 +34,6 @@ class BaseController extends Controller
             $response['data'] = $errorMessages;
         }
 
-        return response()->json($response, 200);
+        return response()->json($response, $code);
     }
 }

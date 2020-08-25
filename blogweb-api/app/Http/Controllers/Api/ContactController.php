@@ -6,13 +6,23 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Contact;
 use Mail;
+use Validator;
+use App\Http\Controllers\Api\BaseController as BaseController;
 
-class ContactController extends Controller
+class ContactController extends BaseController
 {
     public $successStatus = 200;
 
     public function contact(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email'
+        ]);
+        
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), 401);
+        }
         //Contact::create($request->all());
         $contactData = new Contact;
         $contactData->name = $request->name;
@@ -20,27 +30,23 @@ class ContactController extends Controller
         $contactData->subject = $request->subject;
         $contactData->message = $request->message;
         $contactData->save();
-        $this->sendemail($contactData);
-        return response()->json(['message' => 'Great success! New Contact created','success' => $contactData->id], $this-> successStatus);
+        $this->sendemail($contactData);;
+        return $this->sendResponse($contactData->name,'Email Sent with attachment. Check your inbox.');
     }
 
     public function sendemail($contactData)
     {
-        
         $data = array(
                     'name'=> $contactData['name'],
                     'email'=> $contactData['email'],
                     'subject'=> $contactData['subject'],
                     'messages'=> $contactData['message']
-                     );
+                );
       Mail::send('mail', $data, function($mail_message) {
          $mail_message->to('vikas36714@gmail.com', 'Tutorials')
                     ->subject('Contact Form');
-         //$mail_message->attach('C:\xampp\htdocs\Angular-Projects\blog-website\api\public\img1.jpg');
-         //$mail_message->attach('C:\laravel-master\laravel\public\uploads\test.txt');
          $mail_message->from('vikas36714@gmail.com','Vikas gupta');
       });
-      echo "Email Sent with attachment. Check your inbox.";
     }
 
 }
