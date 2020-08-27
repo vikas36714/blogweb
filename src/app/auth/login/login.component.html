@@ -10,14 +10,21 @@
     <div class="col-md-6 login-right wow fadeInRight" data-wow-delay="0.4s">
       <h3>REGISTERED CUSTOMERS</h3>
       <p>If you have an account with us, please log in.</p>
-      <form>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
         <div>
           <span>Email Address<label>*</label></span>
-          <input type="text">
+          <input type="text" formControlName="email">
+          <div *ngIf="submitted && form_controls.email.errors" class="error-color">
+            <div *ngIf="form_controls.email.errors.required"> Email is required</div>
+            <div *ngIf="form_controls.email.errors.email"> Email must be a valid email address</div>
+          </div>
         </div>
         <div>
           <span>Password<label>*</label></span>
-          <input type="password">
+          <input type="password" formControlName="password">
+          <div *ngIf="submitted && form_controls.password.errors" class="error-color">
+            <div *ngIf="form_controls.password.errors.required">Password is required</div>
+          </div>
         </div>
         <a class="forgot" href="#">Forgot Your Password?</a>
         <input type="submit" value="Login">

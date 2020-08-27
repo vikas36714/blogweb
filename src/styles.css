@@ -1534,7 +1534,7 @@ a.b-home:hover{
 	padding: 1em 0;
 }
 .login-right form div {
-	padding: 0 0 2em 0;
+	padding: 0 0 .5em 0;
 }
 .login-right span {
 	color: #999;

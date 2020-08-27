@@ -2,10 +2,10 @@
 
 <div class="main-1">
   <div class="register">
-    <div *ngIf="success; else elseblock" class="contact-message">
+    <div *ngIf="message; else elseblock" class="contact-message">
       <div class="contact-success">
-        <h2 class="text-success">Success!</h2>
-        <h4 class="text-success">Registration form has been successfully submitted.</h4>
+        <h2 [ngClass]="[success ? 'text-success' : 'text-danger']">{{success ? 'Success!' : 'Error!'}}</h2>
+        <h4 [ngClass]="[success ? 'text-success' : 'text-danger']">{{message}}</h4>
       </div>
     </div>
     <ng-template #elseblock>
@@ -49,7 +49,8 @@
         <div class="clearfix"> </div>
         <a class="news-letter" href="#">
           <label class="checkbox">
-            <input type="checkbox" formControlName="acceptTerms" checked="" ><i> </i>Accept Terms & Conditions
+            <input type="checkbox" formControlName="acceptTerms" checked="" ><i> </i>Accept Terms & Conditions 
+            &nbsp;
             <div *ngIf="submitted && form_controls.acceptTerms.errors" class="error-color" style="width: auto;">Accept Ts & Cs is required</div>
           </label>
         </a>

@@ -23,15 +23,15 @@ class BaseController extends Controller
 
     // Error  response method. //
 
-    public function sendError($error, $errorMessages, $code='')
+    public function sendError($error, $errorMessages = [], $code='')
     {
         $response = [
             'success' => false,
-            'message' => $error
+            'message' => $errorMessages
         ];
 
         if(!empty($errorMessages)){
-            $response['data'] = $errorMessages;
+            $response['data'] = $error;
         }
 
         return response()->json($response, $code);

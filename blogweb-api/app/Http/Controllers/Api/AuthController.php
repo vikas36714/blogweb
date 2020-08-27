@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use Auth;
 use App\User;
 use Validator;
+use App\Http\Controllers\Api\BaseController as BaseController;
 
-class AuthController extends Controller
+class AuthController extends BaseController
 {
     public $successStatus = 200;
     /**
@@ -35,12 +36,12 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'firstName' => 'required',
             'lastName' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
             'confirmPassword' => 'required|same:password',
         ]);
         if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()], 401);
+            return $this->sendError('Validation Error.',$validator->errors()->first() ,200);
         }
 
         unset($request->signup);
@@ -55,7 +56,8 @@ class AuthController extends Controller
         $user->save();
         $success['token'] =  $user->createToken('MyApp')-> accessToken;
         // $success['username'] =  $user->username;
-        return response()->json(['success'=>$success], $this-> successStatus);
+        // return response()->json($success, 'Registration form submitted successfully.');
+        return $this->sendResponse($success, 'Registration form submitted successfully.');
     }
 
 

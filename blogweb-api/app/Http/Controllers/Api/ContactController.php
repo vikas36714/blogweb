@@ -21,7 +21,7 @@ class ContactController extends BaseController
         ]);
         
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors(), 401);
+            return $this->sendError('Validation Error.', $validator->errors(), 422);
         }
         //Contact::create($request->all());
         $contactData = new Contact;

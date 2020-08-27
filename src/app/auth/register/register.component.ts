@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   submitted: boolean = false;
   success: boolean = false;
+  message: string;
   error: any;
 
   constructor(private fb: FormBuilder, private authService: AuthService) { }
@@ -42,10 +43,14 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
         return;
     }
-    this.authService.register(this.registerForm.value).subscribe((res:IUser[]) => {
+    this.authService.register(this.registerForm.value).subscribe((res:any) => {
       this.submitted = false;
-      this.success = true;
-      this.registerForm.reset();
+        if(res.success == false){
+          this.success = res.success;
+        }
+          this.success = res.success;
+          this.message = res.message;
+          this.registerForm.reset();
     },
     error => this.error = error
     );
