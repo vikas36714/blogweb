@@ -2,18 +2,12 @@
 
 <div class="main-1">
   <div class="register">
-    <div *ngIf="message; else elseblock" class="contact-message">
+    <div *ngIf="message;" class="contact-message">
       <div class="contact-success">
-        <h2 [ngClass]="[success ? 'text-success' : 'text-danger']">{{success ? 'Success!' : 'Error!'}}</h2>
-        <h4 [ngClass]="[success ? 'text-success' : 'text-danger']">{{message}}</h4>
+        <h2 [ngClass]="[success ? 'success-color' : 'error-color']">{{success ? 'Success!' : 'Error!'}}</h2>
+        <h4 [ngClass]="[success ? 'success-color' : 'error-color']">{{message}}</h4>
       </div>
     </div>
-    <ng-template #elseblock>
-      <div class="error-color" *ngIf="error">
-        <h1>{{error.errorTitle}}</h1>
-        <h3>{{error.errorDesc}}</h3>
-      </div>
-    </ng-template>
     <form [formGroup]="registerForm" (ngSubmit)="register()" >
       <div class="register-top-grid">
         <h3>PERSONAL INFORMATION</h3>
@@ -76,7 +70,6 @@
             <div *ngIf="form_controls.confirmPassword.errors.mustMatch">Passwords must match</div>
           </div>
         </div>
-        
       </div>
       <div class="clearfix"> </div>
         <div class="register-but">
@@ -84,13 +77,6 @@
             <div class="clearfix"> </div>
         </div>
     </form>
-    <!-- <div class="clearfix"> </div>
-    <div class="register-but">
-      <form>
-        <input type="submit" value="submit">
-        <div class="clearfix"> </div>
-      </form>
-    </div> -->
   </div>
 </div>
 <!-- registration -->

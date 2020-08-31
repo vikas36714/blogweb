@@ -20,14 +20,27 @@ class AuthController extends BaseController
 
     public function login()
     {
-        //return request('password');
-        if(Auth::attempt(['username' => request('username'), 'password' => request('password')])){
-            $user = Auth::user();
-            $success['token'] =  $user->createToken('MyApp')-> accessToken;
-            return response()->json(['success' => $success], $this-> successStatus);
-        }
-        else{
-            return response()->json(['error'=>'Unauthorised'], 401);
+        $loginData = [
+            'email'=> request('email'),
+            'password' => request('password'),
+        ];
+
+        $validator = Validator::make($loginData, [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.',$validator->errors()->first() ,422);
+        }else{
+            if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
+                $user = Auth::user();
+                $success['authToken'] =  $user->createToken('MyApp')-> accessToken;
+                return $this->sendResponse($success, 'Logged In.');
+            }
+            else{
+                return $this->sendError('Login Failed','Invalid email or Password',401);
+            }
         }
     }
 
@@ -41,7 +54,7 @@ class AuthController extends BaseController
             'confirmPassword' => 'required|same:password',
         ]);
         if ($validator->fails()) {
-            return $this->sendError('Validation Error.',$validator->errors()->first() ,200);
+            return $this->sendError('Validation Error.',$validator->errors()->first() ,422);
         }
 
         unset($request->signup);
@@ -54,12 +67,9 @@ class AuthController extends BaseController
         $user->is_active = 1;
 
         $user->save();
-        $success['token'] =  $user->createToken('MyApp')-> accessToken;
+        $success['authToken'] =  $user->createToken('MyApp')-> accessToken;
         // $success['username'] =  $user->username;
-        // return response()->json($success, 'Registration form submitted successfully.');
         return $this->sendResponse($success, 'Registration form submitted successfully.');
     }
-
-
 
 }

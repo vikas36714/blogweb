@@ -10,6 +10,12 @@
     <div class="col-md-6 login-right wow fadeInRight" data-wow-delay="0.4s">
       <h3>REGISTERED CUSTOMERS</h3>
       <p>If you have an account with us, please log in.</p>
+      <div *ngIf="message" class="contact-message">
+        <div class="contact-success">
+          <h2 [ngClass]="[success ? 'success-color' : 'error-color']">{{success ? 'Success!' : 'Error!'}}</h2>
+          <h4 [ngClass]="[success ? 'success-color' : 'error-color']">{{message}}</h4>
+        </div>
+      </div>
       <form [formGroup]="loginForm" (ngSubmit)="login()">
         <div>
           <span>Email Address<label>*</label></span>

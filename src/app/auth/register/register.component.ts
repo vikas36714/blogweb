@@ -44,15 +44,15 @@ export class RegisterComponent implements OnInit {
         return;
     }
     this.authService.register(this.registerForm.value).subscribe((res:any) => {
-      this.submitted = false;
-        if(res.success == false){
-          this.success = res.success;
-        }
+          this.submitted = false;
           this.success = res.success;
           this.message = res.message;
           this.registerForm.reset();
     },
-    error => this.error = error
+    error => {
+      this.message = error[0].message;
+      this.success = error[0].success;
+    }
     );
   }
 
