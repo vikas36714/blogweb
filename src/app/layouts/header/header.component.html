@@ -8,15 +8,20 @@
     <div class="head-nav">
       <span class="menu"> </span>
       <ul class="cl-effect-1">
-        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
-        <li><a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">About Us</a>
+        <li><a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
+        <li><a [routerLink]="['/about']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">About Us</a>
         </li>
-        <li><a routerLink="/services" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Services</a>
+        <li><a [routerLink]="['/services']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Services</a>
         </li>
-        <li><a routerLink="/blog" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Blog</a></li>
-        <li><a routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Login</a></li>
-        <li><a routerLink="/contact" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Contact</a>
+        <li><a [routerLink]="['/blog']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Blog</a></li>
+        <li><a [routerLink]="['/contact']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Contact</a>
         </li>
+        <li *ngIf="!isLoggedIn">
+          <a [routerLink]="['/login']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Login</a>
+        </li>
+
+        <li *ngIf="isLoggedIn"><a (click)="logout()" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [ngStyle]="{'cursor': 'pointer'}">Logout</a></li>
+        <li *ngIf="isLoggedIn"><a [routerLink]="['/admin']" routerLinkActive="active" >Dashboard</a></li>
         <div class="clearfix" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"></div>
       </ul>
     </div>

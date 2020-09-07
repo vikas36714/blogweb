@@ -35,5 +35,10 @@ constructor(private http: HttpClient) { }
     }
   }
 
+  logout(){
+    localStorage.removeItem('authToken');
+    localStorage.clear();
+  }
+
 
 }

@@ -9,7 +9,6 @@
         width="100%" height="151px" frameborder="0" style="border:0"></iframe>
     </div>
   </div>
-
   <div class="contact_top">
 
     <div class="col-md-8 contact_left">
@@ -28,9 +27,8 @@
             <h3>{{error.errorDesc}}</h3>
           </div>
         </ng-template>
-        
-        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" >          
-          <div class="form_details">            
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" >
+          <div class="form_details">
             <input type="text" formControlName="name" class="form-control" placeholder="Name" />
             <div *ngIf="submitted && form_controls.name.errors" class="error-color">
                 <div *ngIf="form_controls.name.errors.required">Name is required</div>
@@ -54,7 +52,7 @@
             </div>
           </div>
         </form>
-      
+
     </div>
 
     <div class="col-md-4 company-right">

@@ -1,0 +1,33 @@
+<div class="contact">
+    <div class="row">
+        <div class="col-md-6 pull-left"><h3 class="pull-left">{{pageTitle}}</h3></div>
+        <div class="col-md-6"><a class="btn btn-sm btn-dark pull-right" [routerLink]="['./create']">Create New</a></div>
+    </div>
+    <div class="col-md-12 form-right wow fadeInRight table-responsive" data-wow-delay="0.4s">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Is Featured</th>
+              <th>Is Active</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="blogs && blogs.length">
+            <tr *ngFor="let blog of blogs">
+              <td><img [src]="blog.image" class="img-responsive" [title]="blog.title" style="height: 50px; width: 80px;" /></td>
+              <td>{{blog.title}}</td>
+              <td>{{blog.category_name}}</td>
+              <td><span [ngClass]="[blog.is_active ? 'label label-success': 'label label-default']" style="color: white; width: fit-content;">{{blog.is_active ? 'Active' : 'Deactive'}}</span></td>
+              <td><span [ngClass]="[blog.is_featured ? 'label label-success' : 'label label-default']" style="color: white; width: fit-content;">{{blog.is_featured ? 'Featured' : 'Not Featured'}}</span></td>
+              <td>
+                  <a [routerLink]="[ './blog/edit', blog.id ]" class="btn btn-default btn-sm">Edit</a> &nbsp;
+                  <a [routerLink]="[ './blog/delete', blog.id ]" class="btn btn-default btn-sm">Delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+</div>

@@ -1530,12 +1530,54 @@ a.b-home:hover{
 	text-decoration:none;
 	color:#fff;
 }
+
 .login-right form {
 	padding: 1em 0;
 }
+
+.form-right form {
+  padding: 0px;
+}
+
+.form-right form div {
+	padding: 0 0 .5em 0;
+}
+
 .login-right form div {
 	padding: 0 0 .5em 0;
 }
+
+.form-right span {
+	color: #999;
+	font-size:0.8125em;
+	padding-bottom: 0.2em;
+	display: block;
+	text-transform: uppercase;
+} 
+
+.form-right input[type="text"] {
+	border: 1px solid #26313b;
+	outline-color:#26313b;
+	width: 96%;
+	font-size:1em;
+	padding: 0.5em;
+}
+
+.form-right input[type="submit"] {
+	background:#26313b;
+	color: #FFF;
+	font-size: 1em;
+	padding: 0.6em 1.2em;
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	display: inline-block;
+	text-transform: uppercase;
+	border:none;
+	outline:none;
+}
+
 .login-right span {
 	color: #999;
 	font-size:0.8125em;
@@ -1544,10 +1586,26 @@ a.b-home:hover{
 	text-transform: uppercase;
 }
 .login-right input[type="text"] {
+  border: 1px solid #26313b;
+  background-color: transparent;
+	outline-color:#26313b;
+	width: 96%;
+	font-size:1.1em;
+	padding: 0.5em;
+}
+.login-right select {
+	border: 1px solid #26313b;
+  outline-color:#26313b;
+  background-color: transparent;
+	width: 96%;
+	font-size:1.1em;
+	padding: 0.5em;
+}
+.login-right input[type="file"] {
 	border: 1px solid #26313b;
 	outline-color:#26313b;
 	width: 96%;
-	font-size:1em;
+	font-size:1.1em;
 	padding: 0.5em;
 }
 .login-right input[type="password"] {
@@ -2451,4 +2509,19 @@ a.b-home {
 
 .success-color {
   color: green;
+}
+
+.btn-dark{
+  background: #26313b;
+  color: #fff;
+}
+
+.btn-dark:hover{
+  background-color: #f53f1a;
+  color: #fff;
+}
+
+.btn-default:hover{
+  background-color: #f53f1a;
+  color: #fff;
 }

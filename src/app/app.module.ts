@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { BannerComponent } from './modules/banner/banner.component';
- import { AboutComponent } from './modules/about/about.component';
+import { AboutComponent } from './modules/about/about.component';
 import { BlogComponent } from './modules/blog/blog.component';
 import { ServicesComponent } from './modules/services/services.component';
 import { FeaturedPostsComponent } from './modules/featured-posts/featured-posts.component';
@@ -29,6 +29,8 @@ import { CarouselModule, CarouselConfig } from 'ngx-bootstrap/carousel';
 import { MyLoaderComponent } from './shared/my-loader/my-loader.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { AdminModule } from './admin/admin.module';
 
 
 @NgModule({
@@ -56,6 +58,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     RegisterComponent,
     PostDetailsComponent,
     MyLoaderComponent,
+    DashboardComponent,
 
   ],
   imports: [
@@ -65,6 +68,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     FormsModule,
     ReactiveFormsModule,
     PaginationModule.forRoot(),
+    AdminModule,
     AppRoutingModule
   ],
   providers: [Title, httpInterceptorProviders,

@@ -1,0 +1,66 @@
+<div class="login-page">
+  <div class="account_grid">
+    <div class="col-md-12 login-right wow fadeInRight" data-wow-delay="0.4s">
+      <h3>{{pageTitle}}</h3>
+      <div *ngIf="message" class="contact-message">
+        <div class="contact-success">
+          <h2 [ngClass]="[success ? 'success-color' : 'error-color']">{{success ? 'Success!' : 'Error!'}}</h2>
+          <h4 [ngClass]="[success ? 'success-color' : 'error-color']">{{message}}</h4>
+        </div>
+      </div>
+      <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <span class="col-md-3 text-center" style="font-size: 1.1em;">Title<label>*</label></span>
+          <div class="col-md-9">
+            <input type="text" formControlName="title" placeholder="Enter Title">
+            <div *ngIf="submitted && form_controls.title.errors" class="error-color">
+              <div *ngIf="form_controls.title.errors.required"> Title is required</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <span class="col-md-3 text-center" style="font-size: 1.1em;">Category<label>*</label></span>
+          <div class="col-md-9">
+            <select formControlName="category">
+              <option>Abc</option>
+              <option>xyz</option>
+              <option>ssdw</option>
+            </select>
+            <div *ngIf="submitted && form_controls.category.errors" class="error-color">
+              <div *ngIf="form_controls.category.errors.required"> Category is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <span class="col-md-3 text-center" style="font-size: 1.1em;">Is Featured</span>
+          <div class="col-md-9">
+            <input type="radio" formControlName="is_featured" [value]="1" /> Yes
+            <input type="radio" formControlName="is_featured" [value]="0" /> No
+          </div>
+        </div>
+        <div class="form-row">
+          <span class="col-md-3 text-center" style="font-size: 1.1em;">Is Active</span>
+          <div class="col-md-9">
+            <input type="radio" formControlName="is_active" [value]="1" /> Yes
+            <input type="radio" formControlName="is_active" [value]="0" /> No
+          </div>
+        </div>
+        <div class="form-row">
+            <span class="col-md-3 text-center" style="font-size: 1.1em;">Upload Image<label></label></span>
+            <div class="col-md-9">
+              <input type="file" formControlName="image" />
+            </div>
+          </div>
+          <div class="form-row">
+            <span class="col-md-3 text-center" style="font-size: 1.1em;">Description<label></label></span>
+            <div class="col-md-9">
+              <textarea placeholder="Enter Description" formControlName="description" style="background-color: transparent; width: 96%;" rows="10"></textarea>
+            </div>
+          </div>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+    <div class="clearfix"> </div>
+  </div>
+</div>

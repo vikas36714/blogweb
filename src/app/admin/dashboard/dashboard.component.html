@@ -1,0 +1,22 @@
+<div class="container contact">
+  <h2 class="text-center">{{pageTitle}}</h2>
+  <div style="padding-left: 2%; padding-right: 2%">
+    <div class="row">
+      <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked">
+          <li><a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+              [routerLink]="[ './' ]">Dashboard</a></li>
+          <li><a routerLinkActive="active" [routerLink]="[ './blog' ]">Blogs</a></li>
+          <li><a routerLinkActive="active" [routerLink]="[ './category' ]">Category</a></li>
+          <li><a routerLinkActive="active" [routerLink]="[ './menu' ]">Menu</a></li>
+          <li><a routerLinkActive="active" [routerLink]="[ './profile' ]">Profile</a></li>
+          <li><a (click)="logout()">Logout</a></li>
+        </ul>
+      </div>
+      <div class="col-md-10 form-right wow fadeInRight" data-wow-delay="0.4s">
+        <router-outlet></router-outlet>
+      </div>
+      <div class="clearfix visible-lg"></div>
+    </div>
+  </div>
+</div>
