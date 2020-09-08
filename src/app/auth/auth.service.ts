@@ -35,6 +35,11 @@ constructor(private http: HttpClient) { }
     }
   }
 
+  getAuthorizationToken() {
+    const token = JSON.parse(localStorage.getItem('authToken'));
+    return token;
+  }
+
   logout(){
     localStorage.removeItem('authToken');
     localStorage.clear();

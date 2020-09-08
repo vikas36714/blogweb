@@ -21,11 +21,12 @@
 
         <div class="form-row">
           <span class="col-md-3 text-center" style="font-size: 1.1em;">Category<label>*</label></span>
-          <div class="col-md-9">
-            <select formControlName="category">
-              <option>Abc</option>
-              <option>xyz</option>
-              <option>ssdw</option>
+          <div class="col-md-9" *ngIf="categories">
+            <select formControlName="category_id">
+            <option [ngValue]="" [selected]="true">Choose Category</option>
+              <option *ngFor="let category of categories" [value]="category.id">
+                  {{category.category_name}}
+              </option>
             </select>
             <div *ngIf="submitted && form_controls.category.errors" class="error-color">
               <div *ngIf="form_controls.category.errors.required"> Category is required</div>
@@ -35,7 +36,7 @@
         <div class="form-row">
           <span class="col-md-3 text-center" style="font-size: 1.1em;">Is Featured</span>
           <div class="col-md-9">
-            <input type="radio" formControlName="is_featured" [value]="1" /> Yes
+            <input type="radio" formControlName="is_featured" [value]="1" checked="checked" /> Yes
             <input type="radio" formControlName="is_featured" [value]="0" /> No
           </div>
         </div>
@@ -49,7 +50,13 @@
         <div class="form-row">
             <span class="col-md-3 text-center" style="font-size: 1.1em;">Upload Image<label></label></span>
             <div class="col-md-9">
-              <input type="file" formControlName="image" />
+              <input type="file" id="image"  (change)="onSelectedFile($event)"/>
+              <input type="hidden" name="fileHidden" formControlName="image"/>
+              <div [innerHTML]="uploadError" class="error"></div>
+              <div *ngIf="imagePath">
+                <br />
+                <img [src]="imagePath" width="100px">
+              </div>
             </div>
           </div>
           <div class="form-row">
@@ -58,7 +65,12 @@
               <textarea placeholder="Enter Description" formControlName="description" style="background-color: transparent; width: 96%;" rows="10"></textarea>
             </div>
           </div>
-        <input type="submit" value="Submit">
+        <div class="form-row">
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+                <input type="submit" value="Submit">
+            </div>
+        </div>
       </form>
     </div>
     <div class="clearfix"> </div>

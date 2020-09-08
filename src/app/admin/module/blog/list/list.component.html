@@ -23,8 +23,8 @@
               <td><span [ngClass]="[blog.is_active ? 'label label-success': 'label label-default']" style="color: white; width: fit-content;">{{blog.is_active ? 'Active' : 'Deactive'}}</span></td>
               <td><span [ngClass]="[blog.is_featured ? 'label label-success' : 'label label-default']" style="color: white; width: fit-content;">{{blog.is_featured ? 'Featured' : 'Not Featured'}}</span></td>
               <td>
-                  <a [routerLink]="[ './blog/edit', blog.id ]" class="btn btn-default btn-sm">Edit</a> &nbsp;
-                  <a [routerLink]="[ './blog/delete', blog.id ]" class="btn btn-default btn-sm">Delete</a>
+                  <a [routerLink]="[ './edit', blog.id ]" class="btn btn-default btn-sm">Edit</a> &nbsp;
+                  <a [routerLink]="[ './delete', blog.id ]" class="btn btn-default btn-sm">Delete</a>
               </td>
             </tr>
           </tbody>
