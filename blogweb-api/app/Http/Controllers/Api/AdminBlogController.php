@@ -53,6 +53,13 @@ class AdminBlogController extends BaseController
             'description' => 'required'
            ]);
 
+        //    if($validator->fails()){
+        //     return $this->sendError('Validation Error.', $validator->errors());
+        // }
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.',$validator->errors()->first() ,422);
+        }
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $image_name = time() . '.' . $image->getClientOriginalExtension();
@@ -71,10 +78,6 @@ class AdminBlogController extends BaseController
         $blog->is_featured = $request->is_featured;
         $blog->is_active = $request->is_active;
         $blog->save();
-
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
 
         return $this->sendResponse($blog, 'Blog created successfully.');
     }

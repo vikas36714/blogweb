@@ -3,6 +3,8 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { BlogService } from '../../../services/blog.service';
 import { CategoryService } from 'src/app/admin/services/category.service';
 import { ICategory } from 'src/app/interfaces/category';
+import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/admin/notification.service';
 
 @Component({
   selector: 'app-create',
@@ -21,7 +23,24 @@ export class CreateComponent implements OnInit {
   imagePath: string;
   error: any;
 
-  constructor(private fb: FormBuilder, private blogService: BlogService, private categoryService: CategoryService) { }
+  constructor(private fb: FormBuilder, private blogService: BlogService, private categoryService: CategoryService, private router: Router, private notifyService : NotificationService) { }
+
+   
+  showToasterSuccess(message){
+    this.notifyService.showSuccess(message, "Success")
+  }
+
+  showToasterError(message){
+      this.notifyService.showError(message, "Error")
+  }
+
+  showToasterInfo(message){
+      this.notifyService.showInfo(message, "Info")
+  }
+
+  showToasterWarning(message){
+      this.notifyService.showWarning(message, "Warning")
+  }
 
   ngOnInit(): void {
      // Form initialization //
@@ -51,6 +70,10 @@ export class CreateComponent implements OnInit {
   get form_controls(){ return this.blogForm.controls; }
 
   onSubmit(){
+    // Stop processing invalid form submission //
+    if(this.blogForm.invalid){ return; }
+
+    //  processing form submission data to server //
     const formData = new FormData();
     
     formData.append('title', this.blogForm.get('title').value);
@@ -62,9 +85,9 @@ export class CreateComponent implements OnInit {
     formData.append('description', this.blogForm.get('description').value);
 
     this.blogService.createBlog(formData).subscribe((res: any) => {
-      console.log(res);
+        this.router.navigate(['admin/blog']).then(() => this.showToasterSuccess(res.message));
     },
-    error => this.error = error
+    error => this.router.navigate(['admin/blog']).then(() => this.showToasterError(error[0].message))
     );
 
   }

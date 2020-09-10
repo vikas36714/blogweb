@@ -31,6 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { AdminModule } from './admin/admin.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { AdminModule } from './admin/admin.module';
     ReactiveFormsModule,
     PaginationModule.forRoot(),
     AdminModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [Title, httpInterceptorProviders,
     { provide: CarouselConfig, useValue: { interval: 1500, noPause: true, showIndicators: true } }],
