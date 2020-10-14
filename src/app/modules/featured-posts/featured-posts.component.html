@@ -1,12 +1,23 @@
-<!-- featured blog -->
-<div class="nam-matis">
-  <div class="nam-matis-top">
-    <div class="col-md-6 nam-matis-1" *ngFor="let blog of blogs">
-      <a [routerLink]="['blog', blog.id]"><img src="{{blog.image}}" class="img-responsive" alt="{{blog.title}}"></a>
-      <h3><a [routerLink]="['blog', blog.id]">{{blog.title}}</a></h3>
-      <p>{{blog.description}}.</p>
+<ng-container *ngIf="featuredBlogs && featuredBlogs.length;">
+  <!-- featured blog -->
+  <div class="nam-matis">
+    <div class="nam-matis-top">
+      <div class="col-md-6 nam-matis-1" *ngFor="let featuredBlog of featuredBlogs">
+        <a [routerLink]="['blog', featuredBlog.id]"><img src="{{featuredBlog.image}}" class="img-responsive" alt="{{featuredBlog.title}}"></a>
+        <h3><a [routerLink]="['blog', featuredBlog.id]">{{featuredBlog.title}}</a></h3>
+        <div class="blog-artical-info-text">
+          <p>{{featuredBlog.description}}<a [routerLink]="['blog', featuredBlog.id]">[...]</a></p>
+        </div>
+      </div>
+      <div class="clearfix"> </div>
     </div>
-    <div class="clearfix"> </div>
   </div>
-</div>
-<!--  featured blog -->
+  <!--  featured blog -->
+</ng-container>
+<!-- <ng-template #errorMessage>
+  <div class="service-error" *ngIf="error">
+    <h3>{{ error.errorTitle }}</h3>
+    <p>{{ error.errorDesc }}</p>
+    <a class="b-home" routerLink="/">Back to Home</a>
+  </div>
+</ng-template> -->

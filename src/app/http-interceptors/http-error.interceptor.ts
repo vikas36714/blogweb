@@ -1,7 +1,4 @@
-import {
-    HttpEvent, HttpInterceptor, HttpHandler, HttpRequest,
-    HttpResponse, HttpErrorResponse
-} from '@angular/common/http';
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
@@ -15,26 +12,26 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                 retry(1),
                 catchError((errorResponse: HttpErrorResponse) => {
 
-                    // if (errorResponse.error instanceof ErrorEvent) {
-                    //     // client-side error
-                    //     this.errorMessage = `Error: ${errorResponse.error.message}`;
-                    //     console.log(this.errorMessage);
-                    // } else {
-                    //     // server-side error
-                    //     this.errorMessage = `Error Code: ${errorResponse.status}\nMessage: ${errorResponse.message}`;
-                    //     console.log(this.errorMessage);
-                    // }
-                    // //window.alert(this.errorMessage);
+                    if (errorResponse.error instanceof ErrorEvent) {
+                        // client-side error
+                        this.errorMessage = `Error: ${errorResponse.error.message}`;
+                        //console.log(this.errorMessage);
+                    } else {
+                        // server-side error
+                        this.errorMessage = `Error Code: ${errorResponse.status}\nMessage: ${errorResponse.message}`;
+                        //console.log(this.errorMessage);
+                    }
+                    //window.alert(this.errorMessage);
 
-                    // // return an observable with a user-facing error message
-                    // this.errorMessage = {
-                    //     errorTitle: 'Oops! Request for document failed',
-                    //     errorDesc: 'Something bad happened. Please try again later.'
-                    // };
-                    // return throwError(this.errorMessage);
+                    // return an observable with a user-facing error message
+                    this.errorMessage = {
+                        errorTitle: 'Oops! Request for document failed',
+                        errorDesc: 'Something bad happened. Please try again later.'
+                    };
+                    return throwError(this.errorMessage);
 
                     // 1 - Create empty array to store errors
-                    const errors = [];
+                   /* const errors = [];
                     if (errorResponse.error instanceof ErrorEvent) {
                         // client-side error
                         const errors = `Error: ${errorResponse.error.message}`;
@@ -57,22 +54,26 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                                     if (errorResponse.error.errors.hasOwnProperty(property)) {
 
                                         // 6 - Extract it's array of errors
-                                        const propertyErrors: Array<string> = errorResponse.error.errors[property];
+                                    const propertyErrors: Array<string> = errorResponse.error.errors[property];
 
                                         // 7 - Push all errors in the array to the errors array
                                         propertyErrors.forEach(error => errors.push(error));
                                     }
-
                                 }
-
                             }
-
                         }
                     }
+                    // if(errors.length > 0){
+                    //   this.errorMessage = {
+                    //         errorTitle: 'Oops! Request for document failed',
+                    //         errorDesc: 'Something bad happened. Please try again later.'
+                    //     };
+                    //   return throwError(this.errorMessage);
+                    // }else{
+                    //   return throwError(errors);
+                    // }
+                    return throwError(errors); */
 
-                    //console.log(errors)
-
-                    return throwError(errors);
                 })
             )
     }

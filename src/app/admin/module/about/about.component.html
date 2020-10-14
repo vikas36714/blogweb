@@ -1,0 +1,55 @@
+<div class="login-page">
+  <div class="account_grid">
+    <div class="col-md-12 login-right wow fadeInRight" data-wow-delay="0.4s">
+      <h3>{{pageTitle}}</h3>
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <span class="col-md-3 text-center" style="font-size: 1.1em;">Heading<label>*</label></span>
+          <div class="col-md-9">
+            <input type="text" formControlName="heading" placeholder="Enter Heading">
+            <div *ngIf="submitted && form_controls.heading.errors" class="error-color">
+              <div *ngIf="form_controls.heading.errors.required"> Heading is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <span class="col-md-3 text-center" style="font-size: 1.1em;">Title<label>*</label></span>
+          <div class="col-md-9">
+            <input type="text" formControlName="title" placeholder="Enter Title">
+            <div *ngIf="submitted && form_controls.title.errors" class="error-color">
+              <div *ngIf="form_controls.title.errors.required"> Title is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+            <span class="col-md-3 text-center" style="font-size: 1.1em;">Upload Image<label></label></span>
+            <div class="col-md-9">
+              <input type="file" id="image"  (change)="onSelectedFile($event)"/>
+              <input type="hidden" name="fileHidden" formControlName="image"/>
+              <div [innerHTML]="uploadError" class="error"></div>
+              <div *ngIf="imagePath">
+                <br />
+                <img [src]="imagePath" width="100px">
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <span class="col-md-3 text-center" style="font-size: 1.1em;">Description<label></label></span>
+            <div class="col-md-9">
+              <textarea placeholder="Enter Description" formControlName="description" style="background-color: transparent; width: 96%;" rows="10"></textarea>
+            </div>
+          </div>
+        <div class="form-row">
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+              <!-- about id -->
+              <input type="hidden" formControlName="id" />
+              <!-- End about id -->
+                <input type="submit" value="Update">
+            </div>
+        </div>
+      </form>
+    </div>
+    <div class="clearfix"> </div>
+  </div>
+</div>

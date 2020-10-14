@@ -33,8 +33,10 @@ class AuthController extends BaseController
         if($validator->fails()){
             return $this->sendError('Validation Error.',$validator->errors()->first() ,422);
         }else{
-            if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
+            if(Auth::attempt(['email' => request('email'), 'password' => request('password'), 'is_active' => 1 ])){
+                // The user is active, not suspended, and exists.
                 $user = Auth::user();
+                $success['currentUser'] = $user->first_name.' '.$user->last_name;
                 $success['authToken'] =  $user->createToken('MyApp')-> accessToken;
                 return $this->sendResponse($success, 'Logged In.');
             }

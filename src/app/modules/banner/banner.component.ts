@@ -18,7 +18,8 @@ export class BannerComponent implements OnInit {
       (res: any) => {
         this.blogs = res.data
       },
-       error => this.error = error );
+       error => this.error = error
+      );
   }
 
 }

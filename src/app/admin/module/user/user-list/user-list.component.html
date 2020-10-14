@@ -1,0 +1,30 @@
+<div class="contact">
+  <div class="row">
+      <div class="col-md-6 pull-left"><h3 class="pull-left">{{pageTitle}}</h3></div>
+      <div class="col-md-6"><a class="btn btn-sm btn-dark pull-right" [routerLink]="['./create']">Create New</a></div>
+  </div>
+  <div class="col-md-12 form-right wow fadeInRight table-responsive" data-wow-delay="0.4s">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="users && users.length">
+          <tr *ngFor="let user of users">
+            <td>{{user.first_name}}</td>
+            <td>{{user.last_name}}</td>
+            <td>{{user.email}}</td>
+            <td><span [ngClass]="[user.is_active ? 'label label-success': 'label label-default']" style="color: white; width: fit-content;">{{user.is_active ? 'Active' : 'Deactive'}}</span></td>
+            <td>
+                <a [routerLink]="[ './edit', user.id ]" class="btn btn-dark btn-sm">Edit</a> &nbsp;
+                <a (click)="openModal(user.id)" class="btn btn-dark btn-sm">Delete</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>

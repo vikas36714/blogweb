@@ -16,4 +16,8 @@ constructor(private http: HttpClient) { }
     return this.http.get<any>(this.serverUrl + 'about');
   }
 
+  getOurTeam() :Observable<any>{
+    return this.http.get<any>(this.serverUrl + 'ourTeam');
+  }
+
 }

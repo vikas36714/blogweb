@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost/Angular-Projects/blogweb/blogweb-api/api/'
+  baseUrl: 'http://localhost/angular-projects/blogweb/blogweb-api/api/'
 };
 
 /*

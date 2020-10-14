@@ -14,7 +14,7 @@ export class BlogService {
   constructor(private http: HttpClient) { }
 
   getBlogs(): Observable<IBlog[]> {
-    return this.http.get<IBlog[]>(this.serverUrl + 'blogs');
+    return this.http.get<IBlog[]>(this.serverUrl + 'adminblogs');
   }
 
   getBlog(id: number): Observable<IBlog[]> {
@@ -23,10 +23,6 @@ export class BlogService {
 
   createBlog(data): Observable<IBlog[]> {
     return this.http.post<any>(this.serverUrl + 'createblog', data);
-  }
-
-  editBlog(id: number): Observable<IBlog[]> {
-    return this.http.get<IBlog[]>(this.serverUrl + 'editblog/' + id);
   }
 
   updateBlog(data, id: number): Observable<IBlog[]> {

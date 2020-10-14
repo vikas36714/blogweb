@@ -1,55 +1,13 @@
 <div class="team_grid">
-  <h3 class="m_1">Meet Our Team</h3>
+  <h3 class="m_1">{{heading}}</h3>
   <div class="span_3">
-    <div class="col-md-6 ab-top">
+    <div class="col-md-6 ab-top" *ngFor="let ourTeam of ourTeams">
       <ul class="span_2">
-        <li class="span_2-left"><img src="assets/images/6.jpg" class="img-responsive" alt=""></li>
+        <li class="span_2-left"><img [src]="ourTeam.image" class="img-responsive" alt="{{ourTeam.title}}"></li>
         <li class="span_2-right">
-          <h3>Gummies lollipop</h3>
+          <h3>{{ourTeam.title}}</h3>
 
-          <p>It is a long established fact that a reader will be distracted by the readable
-            content of a page</p>
-        </li>
-        <div class="clearfix"> </div>
-      </ul>
-    </div>
-    <div class="col-md-6 ab-top">
-      <ul class="span_2">
-        <li class="span_2-left"><img src="assets/images/5.jpg" class="img-responsive" alt=""></li>
-        <li class="span_2-right">
-          <h3>Gummies lollipop</h3>
-
-          <p>It is a long established fact that a reader will be distracted by the readable
-            content of a page</p>
-        </li>
-        <div class="clearfix"> </div>
-      </ul>
-    </div>
-    <div class="clearfix"> </div>
-  </div>
-  <div class="span_4">
-    <div class="col-md-6 ab-top">
-      <ul class="span_2">
-        <li class="span_2-left"><img src="assets/images/1.jpg" class="img-responsive" alt=""></li>
-        <li class="span_2-right">
-          <h3>Gummies lollipop</h3>
-
-          <p>It is a long established fact that a reader will be distracted by the readable
-            content of a page</p>
-
-        </li>
-        <div class="clearfix"> </div>
-      </ul>
-    </div>
-    <div class="col-md-6 ab-top">
-      <ul class="span_2">
-        <li class="span_2-left"><img src="assets/images/4.jpg" class="img-responsive" alt=""></li>
-        <li class="span_2-right">
-          <h3>Gummies lollipop</h3>
-
-          <p>It is a long established fact that a reader will be distracted by the readable
-            content of a page</p>
-
+          <p>{{ourTeam.description}}</p>
         </li>
         <div class="clearfix"> </div>
       </ul>

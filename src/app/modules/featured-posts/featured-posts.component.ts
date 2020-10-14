@@ -9,7 +9,7 @@ import { BlogService } from 'src/app/services/blog.service';
 export class FeaturedPostsComponent implements OnInit {
 
   constructor(private blogService:BlogService) { }
-  blogs;
+  featuredBlogs;
   error: any;
   ngOnInit(): void {
     this.getfeaturedBlogs();
@@ -17,10 +17,9 @@ export class FeaturedPostsComponent implements OnInit {
 
   getfeaturedBlogs(){
     this.blogService.getFeaturedtBlogs().subscribe(
-      (res: any) => {
-        this.blogs = res.data
-      },
-       error => this.error = error );
+      (res: any) => this.featuredBlogs = res.data,
+       error => this.error = error
+      );
   }
 
 }

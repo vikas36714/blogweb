@@ -14,7 +14,7 @@ export class BlogComponent implements OnInit {
   contentArray1 = [].fill('');
   contentArray2 = [];
   totalItems;
-  maxSize = 5;
+  itemsPerPage = 5;
 
   constructor(private blogService: BlogService) { }
 
@@ -27,12 +27,12 @@ export class BlogComponent implements OnInit {
         (res:any) => {
           return res;
         });
-      //console.log(this.contentArray2.slice(0, 10));
-      this.blogs = this.contentArray2.slice(0, 10);
+      this.blogs = this.contentArray2.slice(0, this.itemsPerPage);
     },
-    error => this.error = error );
+    error => this.error = error
+    );
   }
- 
+
   pageChanged(event: PageChangedEvent): void {
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;

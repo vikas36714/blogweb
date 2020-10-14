@@ -7,8 +7,9 @@
           <li><a routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
               [routerLink]="[ './' ]">Dashboard</a></li>
           <li><a routerLinkActive="active" [routerLink]="[ './blog' ]">Blogs</a></li>
-          <li><a routerLinkActive="active" [routerLink]="[ './category' ]">Category</a></li>
-          <li><a routerLinkActive="active" [routerLink]="[ './menu' ]">Menu</a></li>
+          <li *ngIf="currentUser?.role == 'admin'"><a routerLinkActive="active" [routerLink]="[ './category' ]">Category</a></li>
+          <li *ngIf="currentUser?.role == 'admin'"><a routerLinkActive="active" [routerLink]="[ './about' ]">About</a></li>
+          <li *ngIf="currentUser?.role == 'admin'"><a routerLinkActive="active" [routerLink]="[ './user' ]">Users</a></li>
           <li><a routerLinkActive="active" [routerLink]="[ './profile' ]">Profile</a></li>
           <li><a (click)="logout()">Logout</a></li>
         </ul>

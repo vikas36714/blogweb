@@ -8,9 +8,15 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
+  navbarOpen = false;
+
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
   }
 
   get isLoggedIn(){ return this.authService.isLoggedIn(); }

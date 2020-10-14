@@ -2,53 +2,67 @@
 <div class="container">
   <div class="blog">
     <div class="blog-content">
-      <div class="blog-content-left" *ngIf="blogs">
-        <div class="blog-articals" *ngFor="let blog of blogs">
-          <div class="blog-artical">
-            <div class="blog-artical-info">
-              <div class="blog-artical-info-img">
-                <a [routerLink]="[blog.id]"><img [src]="blog.image" title="{{blog.title}}" height="356px"></a>
+      <ng-container *ngIf="blogs; else errorMessage">
+        <div class="blog-content-left">
+          <div class="blog-articals" *ngFor="let blog of blogs">
+            <div class="blog-artical">
+              <div class="blog-artical-info">
+                <div class="blog-artical-info-img">
+                  <a [routerLink]="[blog.id]"><img [src]="blog.image" title="{{ blog.title }}" height="356px" /></a>
+                </div>
+                <div class="blog-artical-info-head">
+                  <h2>
+                    <a [routerLink]="[blog.id]">{{ blog.title }}</a>
+                  </h2>
+                  <h6>
+                    Posted on, {{ blog.created_at | date: "medium" }}
+                    <a href="#"> {{ blog.author }}</a>
+                  </h6>
+                </div>
+                <div class="blog-artical-info-text">
+                  <p>
+                    {{ blog.description }}<a [routerLink]="[blog.id]">[...]</a>
+                  </p>
+                </div>
+                <div class="artical-links">
+                  <ul>
+                    <li>
+                      <small> </small><span>{{ blog.created_at | date: "mediumDate" }}</span>
+                    </li>
+                    <li>
+                      <a href="#"><small class="admin"> </small><span>{{ blog.first_name }}
+                          {{ blog.last_name }}</span></a>
+                    </li>
+                    <li>
+                      <a href="#"><small class="no"> </small><span>No comments</span></a>
+                    </li>
+                    <li>
+                      <a [routerLink]="[blog.id]"><small class="posts"> </small><span>View posts</span></a>
+                    </li>
+                    <li>
+                      <a href="#"><small class="link"> </small><span>permalink</span></a>
+                    </li>
+                  </ul>
+                </div>
               </div>
-              <div class="blog-artical-info-head">
-                <h2><a [routerLink]="[blog.id]">{{blog.title}}</a></h2>
-                <h6>Posted on, {{blog.created_at | date: 'medium'}} <a href="#"> {{blog.author}}</a></h6>
-
-              </div>
-              <div class="blog-artical-info-text">
-                <p>{{blog.description}}.<a [routerLink]="[blog.id]">[...]</a></p>
-              </div>
-              <div class="artical-links">
-                <ul>
-                  <li><small> </small><span>{{blog.created_at | date:'mediumDate'}}</span></li>
-                  <li><a href="#"><small class="admin"> </small><span>{{blog.first_name}} {{blog.last_name}}</span></a></li>
-                  <li><a href="#"><small class="no"> </small><span>No comments</span></a></li>
-                  <li><a href="#"><small class="posts"> </small><span>View posts</span></a></li>
-                  <li><a href="#"><small class="link"> </small><span>permalink</span></a></li>
-                </ul>
-              </div>
+              <div class="clearfix"></div>
             </div>
-            <div class="clearfix"> </div>
           </div>
-        </div>
-        <!--start-blog-pagenate-->
-        
-        <pagination  [totalItems]="totalItems"  previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="maxSize" (pageChanged)="pageChanged($event)"></pagination>
+          <!--start-blog-pagenate-->
 
-        <!--//End-blog-pagenate-->
-      </div>
-      <ng-template #showerrormsg>
-        <div class="error-404 text-center" *ngIf="error">
-          <h3>{{error.errorTitle}}</h3>
-          <p>{{error.errorDesc}}</p>
-          <a class="b-home" routerLink="/">Back to Home</a>
+          <pagination [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" (pageChanged)="pageChanged($event)"
+            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+          </pagination>
+
+          <!--//End-blog-pagenate-->
         </div>
-      </ng-template>
+
       <div class="blog-content-right">
         <div class="b-search">
           <form>
             <input type="text" value="Search" onfocus="this.value = '';"
-              onblur="if (this.value == '') {this.value = 'Search';}">
-            <input type="submit" value="">
+              onblur="if (this.value == '') {this.value = 'Search';}" />
+            <input type="submit" value="" />
           </form>
         </div>
         <!--start-twitter-weight-->
@@ -58,11 +72,16 @@
         <app-tags-weight></app-tags-weight>
         <!---- //End-tag-weight---->
       </div>
-      <div class="clearfix"> </div>
-
+      <div class="clearfix"></div>
+    </ng-container>
+      <ng-template #errorMessage>
+        <div class="service-error" *ngIf="error">
+          <h3>{{ error.errorTitle }}</h3>
+          <p>{{ error.errorDesc }}</p>
+          <a class="b-home" routerLink="/">Back to Home</a>
+        </div>
+      </ng-template>
     </div>
   </div>
-
-
 </div>
 <!-- /Blog -->

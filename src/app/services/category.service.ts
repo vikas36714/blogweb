@@ -13,6 +13,7 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   getCategories(): Observable<any> {
-    return this.http.get<any>(this.serverUrl + 'categories');
+    return this.http.get<any>(this.serverUrl + 'getCategories');
   }
+
 }

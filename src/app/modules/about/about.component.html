@@ -1,20 +1,28 @@
-<div class="about" *ngIf="about">
-  <h2>About</h2>
-  <div class="about-top">
-    <div class="col-md-6 ab-top">
-      <img [src]="about.image" class="img-responsive" alt="about.image">
+<ng-container *ngIf="about; else errorMessage">
+  <div class="about" *ngIf="about">
+    <h2>About</h2>
+    <div class="about-top">
+      <div class="col-md-6 ab-top">
+        <img [src]="about.image" class="img-responsive" alt="about.image">
+      </div>
+      <div class="col-md-6 ab-top">
+        <h3>{{about.heading}}</h3>
+        <p>{{about.description}}.</p>
+      </div>
+      <div class="clearfix"> </div>
     </div>
-    <div class="col-md-6 ab-top">
-      <h3>{{about.heading}}</h3>
-      <p>{{about.description}}.</p>
-    </div>
-    <div class="clearfix"> </div>
+    <!-- Meet our Team-->
+    <app-our-team></app-our-team>
+    <!-- End our Team-->
+    <!-- Testimonials-->
+    <app-testimonials></app-testimonials>
+    <!-- End Testimonials-->
   </div>
-  <!-- Meet our Team-->
-  <app-our-team></app-our-team>
-  <!-- End our Team-->
-  <!-- Testimonials-->
-  <app-testimonials></app-testimonials>
-  <!-- End Testimonials-->
-  
-</div>
+</ng-container>
+<ng-template #errorMessage>
+  <div class="service-error" *ngIf="error">
+    <h3>{{ error.errorTitle }}</h3>
+    <p>{{ error.errorDesc }}</p>
+    <a class="b-home" routerLink="/">Back to Home</a>
+  </div>
+</ng-template>

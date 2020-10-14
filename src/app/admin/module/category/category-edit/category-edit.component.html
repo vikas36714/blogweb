@@ -1,0 +1,42 @@
+<div class="login-page">
+  <div class="account_grid">
+    <div class="col-md-12 login-right wow fadeInRight" data-wow-delay="0.4s">
+      <h3>{{pageTitle}}</h3>
+      <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <span class="col-md-3 text-center" style="font-size: 1.1em;">Title<label>*</label></span>
+          <div class="col-md-9">
+            <input type="text" formControlName="category_name" placeholder="Enter Category">
+            <div *ngIf="submitted && form_controls.category_name.errors" class="error-color">
+              <div *ngIf="form_controls.category_name.errors.required"> Category is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <span class="col-md-3 text-center" style="font-size: 1.1em;">Is Featured</span>
+          <div class="col-md-9">
+            <input type="radio" formControlName="is_featured" [value]="1" checked="checked" /> Yes
+            <input type="radio" formControlName="is_featured" [value]="0" /> No
+          </div>
+        </div>
+        <div class="form-row">
+          <span class="col-md-3 text-center" style="font-size: 1.1em;">Is Active</span>
+          <div class="col-md-9">
+            <input type="radio" formControlName="is_active" [value]="1" /> Yes
+            <input type="radio" formControlName="is_active" [value]="0" /> No
+          </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+              <!-- Category id -->
+              <input type="hidden" formControlName="category_id" />
+              <!-- End Category id -->
+                <input type="submit" value="Update">
+            </div>
+        </div>
+      </form>
+    </div>
+    <div class="clearfix"> </div>
+  </div>
+</div>

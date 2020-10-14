@@ -1,9 +1,18 @@
-<div class="fle-xsel">
-  <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset" [interval]="false"
-  [noWrap]="noWrap" [showIndicators]= "false" >
-    <slide *ngFor="let blog of blogs; let index=index" class="mx-auto">
-      <img [src]="blog.image" alt="image blog" style="display: block; width: 100%;">
-    </slide>
-  </carousel>
-  <div class="clearfix"> </div>
-</div>
+<ng-container *ngIf="blogs && blogs.length; else errorMessage">
+  <div class="fle-xsel">
+    <carousel [itemsPerSlide]="itemsPerSlide" [singleSlideOffset]="singleSlideOffset" [interval]="false"
+    [noWrap]="noWrap" [showIndicators]= "false" >
+      <slide *ngFor="let blog of blogs; let index=index" class="mx-auto">
+        <img [src]="blog.image" alt="image blog" style="display: block; width: 100%;">
+      </slide>
+    </carousel>
+    <div class="clearfix"> </div>
+  </div>
+</ng-container>
+<ng-template #errorMessage>
+  <div class="service-error" *ngIf="error">
+    <h3>{{ error.errorTitle }}</h3>
+    <p>{{ error.errorDesc }}</p>
+    <a class="b-home" routerLink="/">Back to Home</a>
+  </div>
+</ng-template>

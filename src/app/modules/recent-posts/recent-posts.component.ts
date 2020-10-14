@@ -8,8 +8,8 @@ import { BlogService } from 'src/app/services/blog.service';
 })
 export class RecentPostsComponent implements OnInit {
 
-  blogs:any
-  error:any
+  recentBlogs:any
+  errorMessage:any
 
   constructor(private blogService: BlogService) { }
 
@@ -19,8 +19,8 @@ export class RecentPostsComponent implements OnInit {
 
   getRecentBlogs(){
     this.blogService.getRecentBlogs().subscribe(
-      (res: any) => this.blogs = res.data,
-      error => this.error = error
+      (res: any) => this.recentBlogs = res.data,
+      error => this.errorMessage = error
     );
   }
 

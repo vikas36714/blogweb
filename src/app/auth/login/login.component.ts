@@ -14,9 +14,10 @@ export class LoginComponent implements OnInit {
   submitted: boolean = false;
   message: string;
   success: boolean = false;
+  error: any;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
-  
+
   ngOnInit(): void {
     // Form initialization //
     this.loginForm = this.fb.group({
@@ -39,13 +40,12 @@ export class LoginComponent implements OnInit {
       if(this.authService.isLoggedIn()){
         const redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/admin';
         this.router.navigate([redirect]);
-        this.message = res.success;
-        this.message = res.message;
       }
     },
-    error => { 
-      this.success = error[0].success;
-      this.message = error[0].message;
+    error => {
+      this.error = error;
+      // this.success = error[0].success;
+      // this.message = error[0].message;
      }
     )
 

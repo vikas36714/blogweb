@@ -12,7 +12,6 @@ import { FeaturedPostsComponent } from './modules/featured-posts/featured-posts.
 import { CategoriesComponent } from './modules/categories/categories.component';
 import { RecentPostsComponent } from './modules/recent-posts/recent-posts.component';
 import { ContactComponent } from './modules/contact/contact.component';
-import { ContentComponent } from './modules/content/content.component';
 import { SliderComponent } from './modules/slider/slider.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -26,12 +25,14 @@ import { PostDetailsComponent } from './modules/post-details/post-details.compon
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './http-interceptors/index';
 import { CarouselModule, CarouselConfig } from 'ngx-bootstrap/carousel';
-import { MyLoaderComponent } from './shared/my-loader/my-loader.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { AdminModule } from './admin/admin.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { NgHttpLoaderModule } from 'ng-http-loader';
+import { HomeComponent } from './modules/home/home.component'; // <============
 
 
 @NgModule({
@@ -47,7 +48,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CategoriesComponent,
     RecentPostsComponent,
     ContactComponent,
-    ContentComponent,
     SliderComponent,
     PageNotFoundComponent,
     LoginComponent,
@@ -58,8 +58,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TagsWeightComponent,
     RegisterComponent,
     PostDetailsComponent,
-    MyLoaderComponent,
     DashboardComponent,
+    HomeComponent,
 
   ],
   imports: [
@@ -68,6 +68,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CarouselModule,
     FormsModule,
     ReactiveFormsModule,
+    NgHttpLoaderModule.forRoot(),
     PaginationModule.forRoot(),
     AdminModule,
     AppRoutingModule,

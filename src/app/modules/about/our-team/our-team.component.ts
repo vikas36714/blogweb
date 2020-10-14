@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AboutService } from 'src/app/services/about.service';
 
 @Component({
   selector: 'app-our-team',
@@ -7,13 +8,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class OurTeamComponent implements OnInit {
 
-  @Input() childMessage: string;
+  heading: string = 'Meet Our Team';
+  ourTeams: any;
 
-
-  constructor() { }
+  constructor(private aboutusService: AboutService) { }
 
   ngOnInit(): void {
-    console.log(this.childMessage);
+    this.aboutusService.getOurTeam().subscribe( res=> {
+      this.ourTeams = res.data;
+    });
+
   }
 
 }

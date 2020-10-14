@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Blog;
 use App\Model\Gallery;
+use App\Model\Category;
 use App\Http\Controllers\Api\BaseController as BaseController;
 
 class BlogController extends BaseController
@@ -38,11 +39,11 @@ class BlogController extends BaseController
     public function show($id)
     {
         $blog = Blog::where('blogs.is_active', 1)
-                        ->where('blogs.id', $id)
-                        ->join('users as user', 'blogs.user_id', '=', 'user.id')
-                        ->leftJoin('categories as category', 'blogs.category_id', '=', 'category.id')
-                        ->select('blogs.*','category.category_name','user.first_name','user.last_name')
-                        ->first();
+                    ->where('blogs.id', $id)
+                    ->join('users as user', 'blogs.user_id', '=', 'user.id')
+                    ->leftJoin('categories as category', 'blogs.category_id', '=', 'category.id')
+                    ->select('blogs.*','category.category_name','user.first_name','user.last_name')
+                    ->first();
         $blog['image'] = url('public/blogs_images/'.$blog->image);
 
         return $this->sendResponse($blog, 'Blog retrieved successfully');
@@ -59,6 +60,7 @@ class BlogController extends BaseController
             ->select('blogs.*','category.category_name','user.first_name','user.last_name')
             ->get();
         foreach($featured_blogs as $featured_blog){
+            $featured_blog['description'] = substr($featured_blog['description'],0,200);
             $featured_blog['image'] = url('public/blogs_images/'.$featured_blog->image);
         }
         return $this->sendResponse($featured_blogs, 'Featured blog retrieved successfully');
@@ -76,10 +78,20 @@ class BlogController extends BaseController
         foreach($recentposts as $recentpost){
             $recentpost['title'] = substr($recentpost['title'],0,15);
             $recentpost['description'] = substr($recentpost['description'],0,30);
-            $recentpost['image'] = url('public/blogs_images/'.$recentpost->image);
+            if($recentpost->image){
+                $recentpost['image'] = url('public/blogs_images/'.$recentpost->image);
+            }else{
+                $recentpost['image'] = url('public/blogs_images/no-image.png');
+            }
 
         }
         return $this->sendResponse($recentposts, 'Recent blog retrieved successfully');
+    }
+
+    public function getCategories()
+    {
+        $categories = Category::where('is_active', 1)->orderBy('id', 'desc')->get();
+        return $this->sendResponse($categories, 'Categories retrieved successfully');
     }
 
     // public function gallery()
