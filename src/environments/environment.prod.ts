@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  baseUrl: 'http://localhost/angular-projects/blogweb/blogweb-api/api/'
 };

@@ -22,8 +22,9 @@ class AdminBlogController extends BaseController
     public function index()
     {
         $blogs = Blog::where('blogs.user_id', Auth::user()->id)
-        ->select('blogs.*','user.first_name','user.last_name')
+        ->select('blogs.*','user.first_name','user.last_name', 'category.category_name')
         ->join('users as user', 'blogs.user_id', '=', 'user.id')
+        ->leftJoin('categories as category', 'blogs.category_id', '=', 'category.id')
         ->orderBy('blogs.id', 'desc')
         ->get();
         foreach($blogs as $blog){
@@ -53,9 +54,6 @@ class AdminBlogController extends BaseController
             'description' => 'required'
            ]);
 
-        //    if($validator->fails()){
-        //     return $this->sendError('Validation Error.', $validator->errors());
-        // }
         if ($validator->fails()) {
             return $this->sendError('Validation Error.',$validator->errors()->first() ,422);
         }
@@ -66,7 +64,6 @@ class AdminBlogController extends BaseController
             $destinationPath = public_path('blogs_images');
             $img = Image::make($image->getRealPath());
             $img->resize(1010, 675)->save($destinationPath.'/'.$image_name);
-           // $image->move($destinationPath, $image_name);
         }
 
         $blog = new Blog;
@@ -104,17 +101,6 @@ class AdminBlogController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function edit($id)
-    // {
-    //     $blog = Blog::where('blogs.id', $id)->first();
-    //     $blog['image'] = url('public/blogs_images/'.$blog->image);
-
-    //     if (is_null($blog)) {
-    //         return $this->sendError('Blog not found.');
-    //     }
-
-    //     return $this->sendResponse($blog, 'Blog retrieved successfully.');
-    // }
 
     /**
      * Update the specified resource in storage.
@@ -125,9 +111,6 @@ class AdminBlogController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        // $this->validate($request, [
-        //     'image'  => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        //    ]);
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'description' => 'required'
@@ -144,7 +127,6 @@ class AdminBlogController extends BaseController
             $destinationPath = public_path('blogs_images');
             $img = Image::make($image->getRealPath());
             $img->resize(1010, 675)->save($destinationPath.'/'.$image_name);
-            //$image->move($destinationPath, $image_name);
         }
             $blog = Blog::find($id);
             $blog->title = $request->title;

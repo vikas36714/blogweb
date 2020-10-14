@@ -19,10 +19,8 @@ class CategoryController extends BaseController
      */
     public function index()
     {
-        if(Auth::user()->role == 'admin'){
-            $categories = Category::orderBy('id', 'desc')->get();
-            return $this->sendResponse($categories, 'Categories retrieved successfully');
-        }
+        $categories = Category::orderBy('id', 'desc')->get();
+        return $this->sendResponse($categories, 'Categories retrieved successfully');
     }
 
     /**
